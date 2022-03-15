@@ -43,8 +43,6 @@ exports.getNextUniqueId = () => {
   return zeroPaddedNumber(counter);
 };
 
-
-
 // Configuration -- DO NOT MODIFY //////////////////////////////////////////////
 
 exports.counterFile = path.join(__dirname, 'counter.txt');
