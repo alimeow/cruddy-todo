@@ -15,7 +15,7 @@ $(() => {
   };
 
   var addTodo = (todo) => {
-    $('#todos').append(renderTodo(todo));
+    $('#todos').append(renderTodo(todo)); // todo === ===  { id: text } === obj
   };
 
   var changeTodo = (id, todo) => {
@@ -37,7 +37,7 @@ $(() => {
   $('#form button').click( (event) => {
     var text = $('#form input').val().trim();
     if (text) {
-      Todo.create(text, addTodo);
+      Todo.create(text, addTodo); // oinvkes the .create in todo.js
     }
     $('#form input').val('');
   });

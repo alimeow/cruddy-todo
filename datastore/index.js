@@ -8,9 +8,9 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id = counter.getNextUniqueId();
+  var id = counter.getNextUniqueId(); //calls the counter.js from require('./counter');
   items[id] = text;
-  callback(null, { id, text });
+  callback(null, { id, text }); // addTodo()
 };
 
 exports.readAll = (callback) => {
@@ -55,6 +55,7 @@ exports.delete = (id, callback) => {
 exports.dataDir = path.join(__dirname, 'data');
 
 exports.initialize = () => {
+
   if (!fs.existsSync(exports.dataDir)) {
     fs.mkdirSync(exports.dataDir);
   }
