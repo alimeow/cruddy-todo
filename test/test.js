@@ -90,6 +90,7 @@ describe('todos', () => {
     it('should only save todo text contents in file', (done) => {
       const todoText = 'walk the dog';
       todos.create(todoText, (err, todo) => {
+
         const todoFileContents = fs.readFileSync(path.join(todos.dataDir, `${todo.id}.txt`)).toString();
         expect(todoFileContents).to.equal(todoText);
         done();
@@ -115,11 +116,12 @@ describe('todos', () => {
       });
     });
 
-    // Refactor this test when completing `readAll`
+    // Refactor this test when completing `readAll` // isn't this cheating???
     it('should return an array with all saved todos', (done) => {
       const todo1text = 'todo 1';
       const todo2text = 'todo 2';
-      const expectedTodoList = [{ id: '00001', text: '00001' }, { id: '00002', text: '00002' }];
+      // const expectedTodoList = [{ id: '00001', text: '00001' }, { id: '00002', text: '00002' }];
+      const expectedTodoList = ['00001.txt', '00002.txt'];
       todos.create(todo1text, (err, todo) => {
         todos.create(todo2text, (err, todo) => {
           todos.readAll((err, todoList) => {

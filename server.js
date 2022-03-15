@@ -19,11 +19,11 @@ app.use(express.static(path.join(__dirname, './public')));
 
 // Create (Crud) -- collection route
 app.post('/todo', (req, res) => {
-  Todo.create(req.body.todoText, (err, newTodo) => {
+  Todo.create(req.body.todoText, (err, newTodo) => { //invokes the .create in index.js because of the require('./datastore'); newTodo ===  { id: text }
     if (err) {
       res.sendStatus(400);
     } else {
-      res.status(201).json(newTodo);
+      res.status(201).json(newTodo); //JSON.stringfy
     }
   });
 });

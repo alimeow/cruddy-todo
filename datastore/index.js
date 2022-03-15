@@ -8,16 +8,44 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id = counter.getNextUniqueId();
-  items[id] = text;
-  callback(null, { id, text });
+  counter.getNextUniqueId(function(err, strID ) { //calls the counter.js from require('./counter');
+    // items[strID] = text;
+
+    fs.writeFile(`${exports.dataDir}/${strID}.txt`, text, (err) => { // (exports.counterFile
+      if (err) {
+        throw (err);
+      } else {
+        // console.log(items);
+        callback(null, {text: text, id: strID}); // addTodo() comes from the client.js
+      }
+    });
+
+  });
 };
 
-exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
+
+
+// it('should only save todo text contents in file', (done) => {
+//   const todoText = 'walk the dog';
+//   todos.create(todoText, (err, todo) => {
+
+//     const todoFileContents = fs.readFileSync(path.join(todos.dataDir, `${todo.id}.txt`)).toString();
+//     expect(todoFileContents).to.equal(todoText);
+//     done();
+//   });
+
+// });
+
+exports.readAll = (callback) => { // [{text:, id:}, {}, {}] ['0001.txt', '0002'.txt, '0003.txt']
+
+  fs.readdir(`${exports.dataDir}`, (err, files) => { // fs.readDir
+    if (err) {
+      throw (err);
+    } else {
+      callback (null, files);
+    }
   });
-  callback(null, data);
+
 };
 
 exports.readOne = (id, callback) => {
@@ -55,6 +83,7 @@ exports.delete = (id, callback) => {
 exports.dataDir = path.join(__dirname, 'data');
 
 exports.initialize = () => {
+
   if (!fs.existsSync(exports.dataDir)) {
     fs.mkdirSync(exports.dataDir);
   }
