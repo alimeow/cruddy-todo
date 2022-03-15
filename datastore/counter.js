@@ -27,7 +27,7 @@ const readCounter = (callback) => { // pass in "error first" function callback
 
 const writeCounter = (count, callback) => {
   var counterString = zeroPaddedNumber(count);
-  fs.writeFile(exports.counterFile, counterString, (err) => { //counter.txt doesn't exists? make a counter.txt
+  fs.writeFile(exports.counterFile, counterString, (err) => { //counter.txt doesn't exists? makes a counter.txt
     if (err) {
       throw ('error writing counter'); // .writeFile can fail due to async problems, what kind I dunno
     } else {
@@ -40,21 +40,7 @@ const writeCounter = (count, callback) => {
 
 exports.getNextUniqueId = (specCB) => { //callback specCB(null, str);
 
-  // var wh = function(err) {
-  //   return counterString;
-  // };
-
-  // var rh = function(err, num) {
-  //   counter = num + 1;
-  //   if (num === 0) { // num 0
-  //     writeCounter(num, specCB);
-  //   } else { // num fileData
-  //     num++;
-  //     writeCounter(num, specCB);
-  //   }
-  // };
-
-  var rh = function(err, num) {
+  var rh = function (err, num) {
     if (err) {
       throw ('BIG ERROR for reading');
     } else {
@@ -65,22 +51,35 @@ exports.getNextUniqueId = (specCB) => { //callback specCB(null, str);
 
   readCounter(rh);
 
-
-  // var rh = function(err, num) {
-  //   if (num === 0) {
-
-  //   } else {
-
-  //   }
-
-  // };
-
-
-
-  // readCounter(rh);
-
-  // return zeroPaddedNumber(counter); // counter 000 uniqueid,note, <--- BROKE EVERYTING
+  // return zeroPaddedNumber(counter); // <--- BROKE EVERYTING counter 000 uniqueid,note,
 };
+
+// var rh = function(err, num) {
+//   if (num === 0) {
+
+//   } else {
+
+//   }
+
+// };
+
+
+
+// readCounter(rh);
+
+// var wh = function(err) {
+//   return counterString;
+// };
+
+// var rh = function(err, num) {
+//   counter = num + 1;
+//   if (num === 0) { // num 0
+//     writeCounter(num, specCB);
+//   } else { // num fileData
+//     num++;
+//     writeCounter(num, specCB);
+//   }
+// };
 
 
 

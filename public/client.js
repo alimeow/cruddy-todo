@@ -37,7 +37,7 @@ $(() => {
   $('#form button').click( (event) => {
     var text = $('#form input').val().trim();
     if (text) {
-      Todo.create(text, addTodo); // oinvkes the .create in todo.js
+      Todo.create(text, addTodo); // invokes the .create in todo.js
     }
     $('#form input').val('');
   });
